@@ -3,7 +3,7 @@
 https://www.youtube.com/watch?v=fQHkgptdw0s&ab_channel=ElatioNodes
 
 ## Articles
-### Bitsong is changing the game in the music industry (article)
+### Bitsong is changing the game in the music industry 
 https://vocal.media/beat/bitsong-is-changing-the-game-in-the-music-industry
 
 ### Bitsong Ambassador Program
