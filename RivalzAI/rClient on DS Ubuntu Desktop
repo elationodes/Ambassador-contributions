@@ -1,0 +1,60 @@
+# Install Rivalz AI rClient on DS Ubuntu Server
+
+# Get DS server from any of the market providers (Hetzner, Contabo, OVH, etc). By default, providers giving you RAID1 setup. I will show you how to get more space and provide for the node. Let's begin.
+
+# 1. Update  your server
+sudo apt update && sudo apt upgrade -y
+
+# 2. Install prerequisites 
+sudo apt install curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar net-tools clang git ncdu neofetch -y
+
+# 3. Create new user; set password, etc
+adduser <desired username>
+
+sudo usermod -aG sudo <username>
+
+# 4. Install Ubuntu Desktop
+sudo apt install ubuntu-desktop -y
+
+# 5. Restart server
+sudo reboot
+
+# Method 1: VNC (Virtual Network Computing):
+# Install VNC server:
+sudo apt install tightvncserver -y
+
+# Set VNC Password
+vncpasswd
+
+vncserver :1  
+# This creates a VNC server session. Note the port number (e.g., :1 for port 5901). Adjust the port number if needed (e.g., :2 for port 5902)
+
+# Connect from your local machine:
+
+# Use a VNC viewer on your local machine (pre-installed on many systems or downloadable from [VNC client download website]). Enter your server's IP address followed by the port number (e.g., your_server_ip:5901). Provide the VNC password when prompted.
+
+# Method 2: RDP (Remote Desktop Protocol):
+# Install RDP server:
+sudo apt install xrdp -y
+
+# Enable RDP:
+sudo nano /etc/xrdp/xrdp.ini
+
+# Add or uncomment the line:
+enabled=true
+
+# Save the changes and restart the RDP service:
+sudo systemctl restart xrdp
+
+# Connect from your local machine:  Use the Remote Desktop Connection tool (pre-installed on Windows) or a third-party RDP client on your local machine (Mac OS or Linux). Enter your server's IP address and login credentials (created in item 3).
+
+
+# Install Meatamask, connect it to the rivalz.aai website.
+# Make downloaded appimage executable. Run downloaded image. 
+# Insert you wallet in the Wallet Management field and save it.
+# Go to storage control and add desired ssd space.
+# Start you node and wait 5-15 seconds until it synchronise with the network. It will be prompted by pop-up message.
+# Comeback to the rivalz.ai website by pressing "VALIDATE NODE" - this will redirect you to the dahsboard. 
+# Check MY CLIENTS tab for new cleint. This will show incative status. Press validate node in the dashboard. 
+
+
