@@ -6,7 +6,7 @@
 sudo apt update && sudo apt upgrade -y
 
 # 2. Install prerequisites 
-sudo apt install curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar net-tools clang git ncdu neofetch -y
+sudo apt install libfuse2 curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar net-tools clang git ncdu neofetch -y
 
 # 3. Create new user; set password, etc
 adduser <desired username>
