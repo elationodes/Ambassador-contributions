@@ -2,15 +2,43 @@
 
 # Print my logo
 logo(){
-echo -e "\033[0;35m"
-echo -e        __      __  _                       __         
-echo -e   ___  / /___ _/ /_(_)___  ____  ____  ____/ /__  _____
-echo -e  / _ \/ / __ `/ __/ / __ \/ __ \/ __ \/ __  / _ \/ ___/
-echo -e /  __/ / /_/ / /_/ / /_/ / / / / /_/ / /_/ /  __(__  ) 
-echo -e \___/_/\__,_/\__/_/\____/_/ /_/\____/\__,_/\___/____/  
-echo -e
-echo 
-echo -e "\e[0m"
+echo -e "\033[36m┌──────────────────────────────────────────────────────────────┐";
+echo -e "|                           .----.                             |";
+echo -e "|                         ...----....                          |";
+echo -e "|         .-=-----. .              ......-====-.               |";
+echo -e "|        ---=-==---..                ..---==+++=+=             |";
+echo -e "|        .      .  ............. ............    .             |";
+echo -e "|                      ..-----==-....      .                   |";
+echo -e "|                          --..                                |";
+echo -e "|                           .                                  |";
+echo -e "|              .        .                                      |";
+echo -e "|              .                          ..     .             |";
+echo -e "|        .        .            .         . .    ..             |";
+echo -e "|        ..                    ..     .  .      ..             |";
+echo -e "|        .        -   .             .... -.     ...            |";
+echo -e "|        .- .    .-..            .- .... =.     .--            |";
+echo -e "|        .#= . .----       .. .  .-.-..=.+..    .--            |";
+echo -e "|        .+-...=====.      ..  . .-------+== .. -+-            |";
+echo -e "|         ---. =+++=.      .--   --=====-+#+. ..=+.            |";
+echo -e "|              -#+##-.-.   -=.- =+==+#@#+@#-                   |";
+echo -e "|                .-=-......---. +@+=+##==-.                    |";
+echo -e "|                          ==-  =+=-.                          |";
+echo -e "|                          .-.                                 |";
+echo -e "|                                                              |";
+echo -e "|                                                              |";
+echo -e "│ ▄▄▄▄    ██▓     ▄▄▄       ▄████▄   ██ ▄█▀ ██▓ ▄████▄  ▓█████ │";
+echo -e "│▓█████▄ ░██▒    ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓██░░██▀ ▀█  ▓█   ▀ │";
+echo -e "│▒██▒ ▄██▒██░    ▒██  ▀█▄  ▒▓█    ▄ ░███▄░ ▒██░░▓█    ▄ ▒███   │";
+echo -e "│▒██░█▀  ▒██░    ░██▄▄▄▄██ ▒▓▓▄ ▄██░░██ █▄ ░██░░▓▓▄ ▄██▒▒▓█  ▄ │";
+echo -e "│░▓█  ▀█▓░██████▒ ▓█   ▓██▒▒ ▓███▀ ░░██▒ █▄░██░▒ ▓███▀ ░░▒████▒│";
+echo -e "│░▒▓███▀▒░ ▒░▓  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░▓  ░ ░▒ ▒  ░░░ ▒░ ░│";
+echo -e "│▒░▒   ░ ░ ░ ▒  ░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░ ▒ ░  ░  ▒    ░ ░  ░│";
+echo -e "│ ░    ░   ░ ░     ░   ▒   ░        ░ ░░ ░  ▒ ░░           ░   │";
+echo -e "│ ░          ░  ░      ░  ░░ ░      ░  ░    ░  ░ ░         ░  ░│";
+echo -e "│      ░                   ░                   ░               │";
+echo -e "|                                                              |";
+echo -e "|           \033[0m🐧 \033[1;34mTelegram: \033[2;32mhttps://t.me/los_pinguin\033[0m  🐧          \033[36m|";
+echo -e "└──────────────────────────────────────────────────────────────┘\033[0m";
 }
 
 # Headers to announce
@@ -32,7 +60,14 @@ system_update() {
 }
 
 install_requirements() {
-  sudo apt install libfuse2 screen curl neofetch iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar net-tools clang git ncdu pkg-config libssl-dev -y
+  sudo apt install tmux curl wget
+}
+
+# Remoove old docker versions
+remoove_old_docker() {
+  for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc;
+    do sudo apt-get remove $pkg;
+  done
 }
 
 # Install Docker and compose plugin
@@ -41,4 +76,11 @@ install_docker() {
   snap install docker
   apt install docker-compose -y
 
+  # Add the repository to Apt sources:
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update -y
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 }
